@@ -42,12 +42,15 @@ $(document).ready(function() {
   $('#editor').on('paste', function(e) {
     var orgEvent = e.originalEvent;
     for (var i = 0; i < orgEvent.clipboardData.items.length; i++) {
-      if (orgEvent.clipboardData.items[i].kind == "file" && orgEvent.clipboardData.items[i].type == "image/png") {
+      if (orgEvent.clipboardData.items[i].kind == "file" && 
+           ( orgEvent.clipboardData.items[i].type == "image/png" || orgEvent.clipboardData.items[i].type == "image/jpeg"  ) ) {
         var imageFile = orgEvent.clipboardData.items[i].getAsFile();
         var fileReader = new FileReader();
         fileReader.onloadend = function() {
-          var myres='<img src="data:image/png;base64, '+fileReader.result+'" >';
+          // fileReader.result already looks like data:image/png;base64, 
+          var myres='<img src="'+fileReader.result+'" >';
           $('#result').html(myres);
+          
           navigator.clipboard.writeText(myres);
         }
         fileReader.readAsDataURL(imageFile);
@@ -59,7 +62,22 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-<div id="main">
+
+  <div id="options">
+  <fieldset>
+      <legend>Choose Mode:</legend>
+  
+      <div>
+        <input type="checkbox" id="clipboard" name="clipboard" checked>
+        <label for="clipboard">Copy to Clipboard</label>
+      </div>
+      <div>
+        <input type="checkbox" id="hugo" name="hugo">
+        <label for="hugo">Hugo Mode with rawHtml</label>
+      </div>
+  </fieldset>
+  </div>
+  <div id="main">
 
 <div id='editor' contenteditable=true></div>
 <div id='resultcnt'>Copyed image src:<br />
