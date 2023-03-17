@@ -65,9 +65,14 @@ $(document).ready(function() {
           //if(document.getElementById("hugo").checked) { 
           //  
           //}
-          document.getElementById("result").textContent=escapeHTML(myres);
+          //document.getElementById("result").textContent=escapeHTML(myres);
+          document.getElementById("result").textContent=myres;
           if(document.getElementById("copytoclipboard").checked) { 
-            navigator.clipboard.writeText(myres);
+            // only allow 256K clipboard writes , browsers nearly stop without breaks
+            if(myres.length < 256 * 1024 * 1024 ) {
+              navigator.clipboard.writeText(myres);
+              document.getElementById("status").textContent="Content too large, try tp copy from codeblock or try button"
+            }
           }
         // clean input
         document.getElementById("editor").innerHTML=""
