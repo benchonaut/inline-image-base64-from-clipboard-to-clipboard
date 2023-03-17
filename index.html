@@ -13,7 +13,7 @@
 }
 #result{
   display: block;
-  max-width: 90%;
+  max-width: 666px;
   margin: 16px 0 32px 0;
   font-size: 12px;
   color: blue;
@@ -36,6 +36,7 @@ $(document).ready(function() {
         var fileReader = new FileReader();
         fileReader.onloadend = function() {
           $('#result').html(fileReader.result);
+          navigator.clipboard.writeText(fileReader.result);
         }
         fileReader.readAsDataURL(imageFile);
         break;
@@ -50,7 +51,7 @@ $(document).ready(function() {
 
 <div id='editor' contenteditable=true></div>
 <div id='resultcnt'>Copyed image src:<br />
-  <div id='result'></div>
+  <code id='result'></code>
 </div>
 
 </div>
