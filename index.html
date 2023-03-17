@@ -38,6 +38,16 @@
 			  crossorigin="anonymous"></script>
 
 <script type="application/javascript">
+
+function escapeHTML(htmlStr) {
+   return htmlStr.replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#39;");        
+
+}
+
 $(document).ready(function() {
   $('#editor').on('paste', function(e) {
     var orgEvent = e.originalEvent;
@@ -49,7 +59,8 @@ $(document).ready(function() {
         fileReader.onloadend = function() {
           // fileReader.result already looks like data:image/png;base64, 
           var myres='<img src="'+fileReader.result+'" >';
-          $('#result').html(myres);
+          //$('#result').html(myres);
+          document.getElementById("result").textContent=escapeHTML(myres);
           
           navigator.clipboard.writeText(myres);
         }
