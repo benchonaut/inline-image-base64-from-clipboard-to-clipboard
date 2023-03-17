@@ -1,0 +1,58 @@
+<html>
+<head>
+<style  type="text/css">
+#editor{
+  width: 500px;
+  min-height: 40px;
+  border: solid 1px gray;
+  padding: 4px;
+}
+#resultcnt{
+  width: 100%;
+  margin-top: 16px;
+}
+#result{
+  display: block;
+  max-width: 90%;
+  margin: 16px 0 32px 0;
+  font-size: 12px;
+  color: blue;
+  overflow: visible;
+  word-break: break-all;
+}
+</style>
+<script
+			  src="code.jquery.com/jquery-3.6.4.min.js"
+			  integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+			  crossorigin="anonymous"></script>
+
+<script type="application/javascript">
+$(document).ready(function() {
+  $('#editor').on('paste', function(e) {
+    var orgEvent = e.originalEvent;
+    for (var i = 0; i < orgEvent.clipboardData.items.length; i++) {
+      if (orgEvent.clipboardData.items[i].kind == "file" && orgEvent.clipboardData.items[i].type == "image/png") {
+        var imageFile = orgEvent.clipboardData.items[i].getAsFile();
+        var fileReader = new FileReader();
+        fileReader.onloadend = function() {
+          $('#result').html(fileReader.result);
+        }
+        fileReader.readAsDataURL(imageFile);
+        break;
+      }
+    }
+  });
+});
+</script>
+</head>
+<body>
+<div id="main">
+
+<div id='editor' contenteditable=true></div>
+<div id='resultcnt'>Copyed image src:<br />
+  <div id='result'></div>
+</div>
+
+</div>
+</body>
+</html>
