@@ -110,23 +110,34 @@ function escapeHTML(htmlStr) {
 }
 
 $(document).ready(function() {
+  setTimeout(() => {
+    initCodeCopy();
+    
+  }, 50 );
   $('#editor').on('paste', function(e) {
+    document.getElementById("status").textContent="paste incoming"
     var orgEvent = e.originalEvent;
     for (var i = 0; i < orgEvent.clipboardData.items.length; i++) {
       if (orgEvent.clipboardData.items[i].kind == "file" && 
            ( orgEvent.clipboardData.items[i].type == "image/png" || orgEvent.clipboardData.items[i].type == "image/jpeg"  ) ) {
+        document.getElementById("status").textContent=document.getElementById("status").textContent+"|file pasted"
         var imageFile = orgEvent.clipboardData.items[i].getAsFile();
         var fileReader = new FileReader();
         fileReader.onloadend = function() {
+          document.getElementById("status").textContent=document.getElementById("status").textContent+"|loaded"
           // fileReader.result already looks like data:image/png;base64, 
           var myres='<img src="'+fileReader.result+'" >';
+          document.getElementById("status").textContent=document.getElementById("status").textContent+"|res_generated"
           $('#resultpre').html(myres);
+          document.getElementById("status").textContent=document.getElementById("status").textContent+"|img_preview"
           if(document.getElementById("hugo").checked) { 
+            document.getElementById("status").textContent=document.getElementById("status").textContent+"|hugo"
             var newres='{{< rawhtml >}}\n' + myres + '\n{{< /rawhtml >}}'
             myres=newres
           }
           //document.getElementById("result").textContent=escapeHTML(myres);
           document.getElementById("result").textContent=myres;
+          document.getElementById("status").textContent=document.getElementById("status").textContent+"|codeblock"
           if(document.getElementById("copytoclipboard").checked) { 
             // only allow 256K clipboard writes , browsers nearly stop without breaks
             if(myres.length < 256 * 1024 * 1024 ) {
@@ -136,7 +147,6 @@ $(document).ready(function() {
           }
         // clean input
         document.getElementById("editor").innerHTML=""
-        initCodeCopy()
         }
         fileReader.readAsDataURL(imageFile);
         break;
