@@ -34,6 +34,7 @@
   page-break-inside: avoid;
   word-break: break-all;
   word-wrap: break-word;
+  white-space: pre-wrap 
 }
 table td, table td * {
     vertical-align: top;
@@ -178,7 +179,7 @@ $(document).ready(function() {
           document.getElementById("status").textContent=document.getElementById("status").textContent+"|img_preview"
           if(document.getElementById("hugo").checked) { 
             document.getElementById("status").textContent=document.getElementById("status").textContent+"|hugo"
-            var newres='{{< rawhtml >}}\n' + myres + '\n{{< /rawhtml >}}'
+            var newres='{{< rawhtml >}}' + '\n' + myres + '\n' + '{{< /rawhtml >}}'
             myres=newres
           }
           //document.getElementById("result").textContent=escapeHTML(myres);
