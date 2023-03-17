@@ -22,7 +22,6 @@
   line-height: 1.6;
   margin: 16px 0 32px 0;
   margin-bottom: 1.6em;
-  max-width: 100%;
   max-width: 666px;
   overflow: auto;
   overflow: visible;
@@ -39,6 +38,9 @@
 
 <script type="application/javascript">
 
+function copyText() {
+  navigator.clipboard.writeText(document.getElementById("result").textContent);
+}
 function escapeHTML(htmlStr) {
    return htmlStr.replace(/&/g, "&amp;")
          .replace(/</g, "&lt;")
@@ -79,7 +81,9 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-
+<div id="status">
+  Nothing happened yed
+</div>
   <div id="options">
   <fieldset>
       <legend>Choose Mode:</legend>
@@ -97,6 +101,9 @@ $(document).ready(function() {
   <div id="main">
 
 <div id='editor' contenteditable=true></div>
+<hr>
+<button onclick="copyText()">Copy</button>
+<hr>
 <div id='resultcnt'>Copyed image src:<br />
   <code id='result'></code>
 </div>
