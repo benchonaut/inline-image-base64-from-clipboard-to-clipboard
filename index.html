@@ -142,49 +142,54 @@ $(document).ready(function() {
 
 </head>
 <body>
-<code id="status">
-  Nothing happened yed
-</code>
-  <div id="options">
-  <fieldset>
-      <legend>Choose Mode:</legend>
-  
-      <div>
-        <input type="checkbox" id="copytoclipboard" name="copytoclipboard" checked>
-        <label for="copytoclipboard">Copy to Clipboard</label>
+<div id="outerdiv">
+  <center>
+    <code id="status">
+      Nothing happened yed
+    </code>
+      <div id="options">
+      <fieldset>
+          <legend>Choose Mode:</legend>
+      
+          <div>
+            <input type="checkbox" id="copytoclipboard" name="copytoclipboard" checked>
+            <label for="copytoclipboard">Copy to Clipboard</label>
+          </div>
+          <div>
+            <input type="checkbox" id="hugo" name="hugo">
+            <label for="hugo">Hugo Mode with rawHtml</label>
+          </div>
+      </fieldset>
       </div>
-      <div>
-        <input type="checkbox" id="hugo" name="hugo">
-        <label for="hugo">Hugo Mode with rawHtml</label>
-      </div>
-  </fieldset>
-  </div>
-  <div id="main">
-
-<div id='editor' contenteditable=true></div>
-<hr>
-<table>
-  <thead><tr><th>CODE</th><th>preview</th></tr></thead>
-  <tbody>
-    <tr>
-      <td>
-      <div id="resultcnt">Copied image src:<br />
-        <code id="result" class="language-html"></code>
-        <button onclick="copyText()">Copy ( emergency )</button>
-        <hr>
-      </div>
-      </td>
-      <td>
-        <div id='resultprehead'>Copied image:<br />
-          <code id='resultpre'></code>
-          <hr>
-        </div>
-        </td>
-    </tr>
-  </tbody>
-
-</table>
+      <div id="main">
+    
+    <div id='editor' contenteditable=true></div>
+    <hr>
+    <table>
+      <thead><tr><th>CODE</th><th>preview</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>
+          <div id="resultcnt">Copied image src:<br />
+            <code id="result" class="language-html"></code>
+            <button onclick="copyText()">Copy ( emergency )</button>
+            <hr>
+          </div>
+          </td>
+          <td>
+            <div id='resultprehead'>Copied image:<br />
+              <code id='resultpre'></code>
+              <hr>
+            </div>
+            </td>
+        </tr>
+      </tbody>
+    
+    </table>
+    </div>
+  </center>
 </div>
+
 
 
 </body>
