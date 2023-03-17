@@ -60,9 +60,15 @@ $(document).ready(function() {
           // fileReader.result already looks like data:image/png;base64, 
           var myres='<img src="'+fileReader.result+'" >';
           //$('#result').html(myres);
+          //if(document.getElementById("hugo").checked) { 
+          //  
+          //}
           document.getElementById("result").textContent=escapeHTML(myres);
-          
-          navigator.clipboard.writeText(myres);
+          if(document.getElementById("copytoclipboard").checked) { 
+            navigator.clipboard.writeText(myres);
+          }
+        // clean input
+        document.getElementById("editor").innerHTML=""
         }
         fileReader.readAsDataURL(imageFile);
         break;
@@ -79,8 +85,8 @@ $(document).ready(function() {
       <legend>Choose Mode:</legend>
   
       <div>
-        <input type="checkbox" id="clipboard" name="clipboard" checked>
-        <label for="clipboard">Copy to Clipboard</label>
+        <input type="checkbox" id="copytoclipboard" name="copytoclipboard" checked>
+        <label for="copytoclipboard">Copy to Clipboard</label>
       </div>
       <div>
         <input type="checkbox" id="hugo" name="hugo">
