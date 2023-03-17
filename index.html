@@ -35,6 +35,48 @@
   word-break: break-all;
   word-wrap: break-word;
 }
+.semi-transparent-button {
+  display: block;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 8px;
+  width: 80%;
+  max-width: 200px;
+  background: #fff; /* fallback color for old browsers */
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: all 0.3s ease-out;
+}
+.semi-transparent-button:hover,
+.semi-transparent-button:focus,
+.semi-transparent-button:active {
+  background: #fff;
+  color: #000;
+  transition: all 0.5s ease-in;
+}
+.semi-transparent:focus {
+  outline: none;
+}
+
+.is-blue {
+  background: #1e348e; /* fallback color for old browsers */
+  background: rgba(30, 52, 142, 0.5);
+}
+.is-blue:hover,
+.is-blue:focus,
+.is-blue:active {
+  background: #1e348e; /* fallback color for old browsers */
+  background: rgb(30, 52, 142);
+  color: #fff;
+}
+
+.with-border {
+  border: 1px solid #fff;
+}
 </style>
 <script
 			  src="code.jquery.com/jquery-3.6.4.min.js"
@@ -56,7 +98,7 @@ function initCodeCopy() {
       parent.insertBefore(wrapper, referenceEl);
       wrapper.append(block.parentElement);
       const copyBtn = document.createElement('button');
-      copyBtn.setAttribute('class', 'copy-button');
+      copyBtn.setAttribute('class', 'copy-button semi-transparent-button is-blue');
       copyBtn.setAttribute('data-lang', lang);
       copyBtn.innerHTML = `${lang} <svg viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M7 6V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-3v3c0 .552-.45 1-1.007 1H4.007A1.001 1.001 0 0 1 3 21l.003-14c0-.552.45-1 1.007-1H7zM5.003 8L5 20h10V8H5.003zM9 6h8v10h2V4H9v2z" fill="currentColor"/></svg>`;
       //wrapper.insertAdjacentElement('beforeend', copyBtn);
@@ -188,7 +230,7 @@ $(document).ready(function() {
           <td>
           <div id="resultcnt"><br />
             <code id="result" class="language-html"></code>
-            <button onclick="copyText()">Copy ( emergency )</button>
+            <button class="semi-transparent-button is-blue"  onclick="copyText()">Copy ( emergency )</button>
             <hr>
           </div>
           </td>
