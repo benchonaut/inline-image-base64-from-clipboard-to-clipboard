@@ -120,10 +120,11 @@ $(document).ready(function() {
         fileReader.onloadend = function() {
           // fileReader.result already looks like data:image/png;base64, 
           var myres='<img src="'+fileReader.result+'" >';
-          //$('#result').html(myres);
-          //if(document.getElementById("hugo").checked) { 
-          //  
-          //}
+          $('#resultpre').html(myres);
+          if(document.getElementById("hugo").checked) { 
+            var newres='{{< rawhtml >}}\n' + myres + '\n{{< /rawhtml >}}'
+            myres=newres
+          }
           //document.getElementById("result").textContent=escapeHTML(myres);
           document.getElementById("result").textContent=myres;
           if(document.getElementById("copytoclipboard").checked) { 
@@ -175,7 +176,7 @@ $(document).ready(function() {
       <tbody>
         <tr>
           <td>
-          <div id="resultcnt">Copied image src:<br />
+          <div id="resultcnt"><br />
             <code id="result" class="language-html"></code>
             <button onclick="copyText()">Copy ( emergency )</button>
             <hr>
